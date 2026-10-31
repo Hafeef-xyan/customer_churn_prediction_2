@@ -1,3 +1,7 @@
 data/ folder contains the churn data, and the data has been splitted to initial and retrain... 
 its for train the model with initial data first... 
 and use the retrain data for retrain the model after detecting the data drift
+
+mlflow:
+    mlflow saves and registers all trained model... but, it promotes to production only when the model meet 80% acc.
+    currently, model saves as the name='Logistic_model', but, it registers as 'CustomerChurnModel'.
