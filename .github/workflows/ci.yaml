@@ -17,10 +17,6 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v4
 
-      - name: check python
-        run : |
-          python --version
-          where.exe python
       
       - name: install dependencies
         run: |
