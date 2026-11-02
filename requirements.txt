@@ -1,6 +1,9 @@
-numpy
-pandas
-scikit-learn
-pathlib
-dvc
+fastapi
+uvicorn
 mlflow
+scikit-learn
+pandas
+numpy
+pydantic
+pytest
+httpx
