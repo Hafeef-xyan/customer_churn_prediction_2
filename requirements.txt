@@ -8,3 +8,4 @@ pydantic
 pytest
 httpx
 dagshub
+prometheus_fastapi_instrumentator
