@@ -18,12 +18,27 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Add Python to PATH
+        shell: powershell
         run: |
-          "C:\Users\DELL\AppData\Local\Programs\Python\Python310" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          "C:\Users\DELL\AppData\Local\Programs\Python\Python310\Scripts" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          $pythonDir = "C:\Users\DELL\AppData\Local\Programs\Python\Python310"
+          $scriptsDir = "$pythonDir\Scripts"
 
-      - name: check python
-        run : python --version
+          Write-Host "Checking Python installation..."
+
+          Test-Path "$pythonDir\python.exe"
+
+          Get-ChildItem $pythonDir
+
+          Add-Content -Path $env:GITHUB_PATH -Value $pythonDir
+          Add-Content -Path $env:GITHUB_PATH -Value $scriptsDir
+        
+      - name: Check Python
+        shell: powershell
+        run: |
+          whoami
+          $env:PATH
+          Get-Command python -ErrorAction SilentlyContinue
+          python --version
       
       - name: install dependencies
         run: |
