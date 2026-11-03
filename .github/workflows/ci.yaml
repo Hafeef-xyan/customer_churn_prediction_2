@@ -17,6 +17,14 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v4
 
+      - name: Add Python to PATH
+        run: |
+          "C:\Users\DELL\AppData\Local\Programs\Python\Python310" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          "C:\Users\DELL\AppData\Local\Programs\Python\Python310\Scripts" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: check python
+        run : |
+          python --version
       
       - name: install dependencies
         run: |
