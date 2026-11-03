@@ -24,8 +24,6 @@ DATA_PATH = BASE_DIR / 'data' / 'processed_data' / "initial_train.csv"
 MODEL_NAME = 'CustomerChurnModel'
 EXPERIMENT_NAME = 'Customer_Churn_Experiments'
 
-"""mlflow.set_tracking_uri("http://127.0.0.1:5000")
-mlflow.set_experiment(EXPERIMENT_NAME)"""
 
 dagshub.init(
     repo_owner='Hafeef-xyan',
