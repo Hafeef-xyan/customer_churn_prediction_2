@@ -20,31 +20,20 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v4
 
-      - name: Check Python
-        shell: powershell
-        run: |
-          $python = "C:\Python310\python.exe"
-          if (!(Test-Path $python)) {
-              throw "Python not found at $python"
-          }
-          & $python --version
+      - name: check python
+        run: python --version
       
-      - name: Install dependencies
-        shell: powershell
+      - name: install dependencies
         run: |
-          $python = "C:\Python310\python.exe"
-          & $python -m pip install --upgrade pip
-          & $python -m pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
 
       - name: Check MLflow connection
         shell: powershell
         run: |
           Write-Host "MLflow URI: $env:MLFLOW_TRACKING_URI"
           Invoke-WebRequest http://127.0.0.1:5000/ -UseBasicParsing
-
+          
       - name: Run API tests
-        shell: powershell
-        run: |
-          $python = "C:\Python310\python.exe"
-          & $python -m pytest tests/ -v
+        run: python -m pytest tests/ -v
 
