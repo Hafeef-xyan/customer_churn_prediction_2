@@ -60,7 +60,7 @@ def train_model(x_train, y_train, scaler):
     model = Pipeline([
         ('scaler',scaler),
         ('model',LogisticRegression(
-            max_iter=1000,
+            max_iter=5000,
             class_weight='balanced',
             random_state=42
         ))
