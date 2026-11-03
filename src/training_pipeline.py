@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import mlflow
 import mlflow.sklearn
+import dagshub
 
 from mlflow.tracking import MlflowClient
 from pathlib import Path
@@ -23,7 +24,14 @@ DATA_PATH = BASE_DIR / 'data' / 'processed_data' / "initial_train.csv"
 MODEL_NAME = 'CustomerChurnModel'
 EXPERIMENT_NAME = 'Customer_Churn_Experiments'
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+"""mlflow.set_tracking_uri("http://127.0.0.1:5000")
+mlflow.set_experiment(EXPERIMENT_NAME)"""
+
+dagshub.init(
+    repo_owner='Hafeef-xyan',
+    repo_name="customer_churn_prediction_2",
+    mlflow=True
+)
 mlflow.set_experiment(EXPERIMENT_NAME)
 
 client = MlflowClient()
@@ -111,13 +119,13 @@ if __name__ == '__main__':
             print(f"{metric}: {value:.4f}")
 
         # 4. log model artifact
-        mlflow.sklearn.log_model(
+        model_info = mlflow.sklearn.log_model(
             sk_model=model,
             name="logistic_model",
         )
 
         # 5. Register Model
-        model_uri = f"runs:/{run.info.run_id}/logistic_model"
+        model_uri = model_info.model_uri
 
         registered_model = mlflow.register_model(
             model_uri=model_uri,
