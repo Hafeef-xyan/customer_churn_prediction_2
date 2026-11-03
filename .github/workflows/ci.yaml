@@ -13,6 +13,9 @@ jobs:
   test:
     runs-on: self-hosted
 
+    env:
+      MLFLOW_TRACKING_URI: http://127.0.0.1:5000
+
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
@@ -25,9 +28,12 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
-      - name: Run API tests
-        env: 
-          MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+      - name: Check MLflow connection
+        shell: powershell
         run: |
-          python -m pytest tests/ -v
+          Write-Host "MLflow URI: $env:MLFLOW_TRACKING_URI"
+          Invoke-WebRequest http://127.0.0.1:5000/ -UseBasicParsing
+          
+      - name: Run API tests
+        run: python -m pytest tests/ -v
 
