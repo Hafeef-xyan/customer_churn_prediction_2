@@ -7,6 +7,7 @@ import dagshub
 from .schemas import CustomerData
 from fastapi import FastAPI, HTTPException
 from mlflow.tracking import MlflowClient
+from prometheus_fastapi_instrumentator import Instrumentator
 
 MODEL_NAME = 'CustomerChurnModel'
 dagshub.init(
@@ -43,6 +44,8 @@ app = FastAPI(
     title="Customer Churn Prediction API",
     description="Predict customer churn using an MLflow registered model."
 )
+
+Instrumentator().instrument(app).expose(app)
 
 @app.get("/")
 def home():
