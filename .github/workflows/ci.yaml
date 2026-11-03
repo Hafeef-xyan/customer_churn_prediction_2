@@ -14,7 +14,8 @@ jobs:
     runs-on: self-hosted
 
     env:
-      MLFLOW_TRACKING_URI: http://127.0.0.1:5000
+      MLFLOW_TRACKING_URI: https://dagshub.com/Hafeef-xyan/customer_churn_prediction_2.mlflow
+      DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_USER_TOKEN }}
 
     steps:
       - name: checkout repository
