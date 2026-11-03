@@ -37,3 +37,5 @@ jobs:
       - name: Run API tests
         run: python -m pytest tests/ -v
 
+      - name: Build Docker image
+        run: docker build -t customer-churn-api:ci .
