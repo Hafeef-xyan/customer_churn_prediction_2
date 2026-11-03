@@ -33,7 +33,7 @@ jobs:
         shell: powershell
         run: |
           Write-Host "MLflow URI: $env:MLFLOW_TRACKING_URI"
-          Invoke-WebRequest http://127.0.0.1:5000/ -UseBasicParsing
+          Invoke-WebRequest "$env:MLFLOW_TRACKING_URI/" -UseBasicParsing
           
       - name: Run API tests
         run: python -m pytest tests/ -v
