@@ -17,28 +17,8 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v4
 
-      - name: Add Python to PATH
-        shell: powershell
-        run: |
-          $pythonDir = "C:\Users\DELL\AppData\Local\Programs\Python\Python310"
-          $scriptsDir = "$pythonDir\Scripts"
-
-          Write-Host "Checking Python installation..."
-
-          Test-Path "$pythonDir\python.exe"
-
-          Get-ChildItem $pythonDir
-
-          Add-Content -Path $env:GITHUB_PATH -Value $pythonDir
-          Add-Content -Path $env:GITHUB_PATH -Value $scriptsDir
-        
-      - name: Check Python
-        shell: powershell
-        run: |
-          whoami
-          $env:PATH
-          Get-Command python -ErrorAction SilentlyContinue
-          python --version
+      - name: check python
+        run: python --version
       
       - name: install dependencies
         run: |
