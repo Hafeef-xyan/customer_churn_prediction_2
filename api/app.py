@@ -51,6 +51,12 @@ def home():
         'status':"running"
     }
 
+@app.get('/hello')
+def hello():
+    return {
+        "message":"hello"
+    }
+
 @app.get('/health')
 def health():
     return {

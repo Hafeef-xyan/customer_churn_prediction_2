@@ -58,3 +58,8 @@ def prediction_invalid_input():
     response = client.post('/predict',json=customer_data)
 
     assert response.status_code == 422
+
+def test_hello():
+    response = client.get("/hello")
+
+    assert response.status_code == 200
