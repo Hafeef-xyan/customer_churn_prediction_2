@@ -5,3 +5,22 @@ and use the retrain data for retrain the model after detecting the data drift
 mlflow:
     mlflow saves and registers all trained model... but, it promotes to production only when the model meet 80% acc.
     currently, model saves as the name='Logistic_model', but, it registers as 'CustomerChurnModel'.
+
+the project has arrived till monitoring..
+
+what did on this project:
+    - splitted og data to initial and retrain data.
+    - versioned data using the dvc.
+    - trained the LogisticRegression model and tracked experiments using mlflow.
+    - all trained models are logged and registered into mlflow. but, only the model which passes above 80% accuaracy are 
+      maded to production.. used mlflow alias for that.
+    - used fastapi to make it an application.
+    - used docker to package the application.
+    - implemented ci for test the api, python, dockerizing.
+    - hosted mlflow server on dagshub. so, whenever i train a better model and it passes the threshold, the application 
+      could load the production model directly from the mlflow.sklearn.
+    - deployed the application on render. hosted mlflow connected to app using dagshub library. application deployed to 
+      render after passing the ci tests.
+    - used prometheus and grafana for monitoring. used their official image on docker to use the prometheus and grafana.
+    - created three metrics (high api latency, API Error rate, Total API requests).
+    - created alertness for each metric. and setted the gmail for contact point.
